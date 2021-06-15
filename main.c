@@ -176,6 +176,7 @@ void print_poly_descending_expo(struct Node*head) {
     ptr = head;
 
     printf("f(x)= ");
+
     while (ptr != NULL) {
         if(ptr->coeff!=0) {
             if(ptr->coeff==1) {
@@ -210,6 +211,7 @@ struct Node*final_poly_simplify(struct Node*head) {
     struct Node *current = head;
     struct Node *ptr = head->next;
     struct Node *ptr2=ptr;//ptr2 is for deleting the node that ptr previously points to
+
     while (current != NULL&&ptr!=NULL) {
             while(current->expo==ptr->expo&& ptr!=NULL) {
                 current->coeff = current->coeff + ptr->coeff;
@@ -218,10 +220,11 @@ struct Node*final_poly_simplify(struct Node*head) {
                 free(ptr2);
                 ptr2=ptr;
             }
-        current=ptr;
-        ptr=ptr->next;
+        current=ptr;//move on to the next node if exponents are not equal
+        ptr=ptr->next;//ptr alwasy points to 1 node ahead of the current node
         ptr2=ptr;
     }
+
     return head;
 }
 
